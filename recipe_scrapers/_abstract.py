@@ -13,11 +13,11 @@ HEADERS = {
 
 
 class AbstractScraper(metaclass=ExceptionHandlingMetaclass):
-    def __init__(self, url, exception_handling=True, meta_http_equiv=False, test=False):
+    def __init__(self, url, page_data = None, exception_handling=True, meta_http_equiv=False, test=False):
         if test:  # when testing, we load a file
             with url:
                 page_data = url.read()
-        else:
+        elif page_data != None:
             page_data = requests.get(url, headers=HEADERS).content
 
         self.exception_handling = exception_handling
